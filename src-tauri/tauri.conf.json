@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "pixoonair",
+  "productName": "Pixoonair",
   "version": "0.1.0",
   "identifier": "me.moqada.pixoonair",
   "build": {
@@ -12,14 +12,22 @@
   "app": {
     "windows": [
       {
-        "title": "pixoonair",
-        "width": 800,
-        "height": 600
+        "label": "main",
+        "fullscreen": false,
+        "alwaysOnTop": true,
+        "focus": false,
+        "visible": false,
+        "resizable": false,
+        "decorations": false,
+        "transparent": true,
+        "width": 300,
+        "height": 300
       }
     ],
     "security": {
       "csp": null
-    }
+    },
+    "macOSPrivateApi": true
   },
   "bundle": {
     "active": true,
