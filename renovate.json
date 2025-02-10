@@ -4,6 +4,12 @@
     "config:recommended",
     "schedule:weekends"
   ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "enabled": false
+    }
+  ],
   "rangeStrategy": "bump",
   "timezone": "Asia/Tokyo"
 }
