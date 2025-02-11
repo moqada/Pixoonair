@@ -1,4 +1,5 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+use serde::Deserialize;
 use settings::AppSettings;
 use std::sync::{
     atomic::{AtomicBool, Ordering},
@@ -15,6 +16,12 @@ mod settings;
 mod tray;
 
 const SETTINGS_FILE_NAME: &str = "settings.json";
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
+enum DisplayMode {
+    Normal,
+    OnAir,
+}
 
 #[tauri::command]
 async fn save_settings(
@@ -61,6 +68,19 @@ fn load_settings(app_handle: tauri::AppHandle) -> Result<AppSettings, String> {
     let store = res.unwrap();
     let app_settings = settings::AppSettings::load_from_store(&store);
     Ok(app_settings)
+}
+
+#[tauri::command]
+async fn change_display_mode(
+    app_handle: tauri::AppHandle,
+    mode: DisplayMode,
+) -> Result<(), String> {
+    let settings = load_settings(app_handle)?;
+    match mode {
+        DisplayMode::Normal => activate_normal_mode(settings).await?,
+        DisplayMode::OnAir => activate_on_air_mode(settings).await?,
+    }
+    Ok(())
 }
 
 async fn get_device_by_name(device_name: &str) -> Result<Option<pixoo::Device>, String> {
@@ -151,7 +171,11 @@ pub fn run() {
             );
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![load_settings, save_settings])
+        .invoke_handler(tauri::generate_handler![
+            change_display_mode,
+            load_settings,
+            save_settings
+        ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application");
     main_app.run(move |_app_handle, event| match event {
