@@ -21,6 +21,10 @@ const saveSettings = async (settings: AppSettings): Promise<void> => {
   await invoke('save_settings', settings);
 };
 
+const changeDisplayMode = async (mode: 'onAir' | 'normal'): Promise<void> => {
+  await invoke('change_display_mode', {mode});
+};
+
 const applyAutoStart = async (enabled: boolean): Promise<void> => {
   if (enabled) {
     await enable();
@@ -35,6 +39,12 @@ function App() {
   const [gifFileUrl, setGifFileUrl] = useState('');
   const [gifFileType, setGifFileType] = useState<'id' | 'url'>('id');
   const [isAutoStartEnabled, setIsAutoStartEnabled] = useState(false);
+  const onClickOnAirMode = useCallback(() => {
+    changeDisplayMode('onAir');
+  }, []);
+  const onClickNormalMode = useCallback(() => {
+    changeDisplayMode('normal');
+  }, []);
   const onChangeTargetDeviceName = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setTargetDeviceName(e.currentTarget.value);
@@ -92,6 +102,11 @@ function App() {
 
   return (
     <main className="container">
+      <div className="operation-box">
+        <button onClick={onClickOnAirMode}>On Air mode</button>
+        <button onClick={onClickNormalMode}>Normal mode</button>
+      </div>
+      <hr />
       <form className="row" onSubmit={onSubmit}>
         <label htmlFor="input-target-device-name">Target Device Name</label>
         <input

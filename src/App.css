@@ -51,6 +51,15 @@ body {
   flex-direction: column;
 }
 
+.operation-box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.operation-box button {
+  flex: 1;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -107,6 +116,12 @@ fieldset {
 fieldset label {
   margin-left: 0.5em;
   margin-right: 1em;
+}
+
+hr {
+  margin: 2em 0;
+  border: none;
+  border-top: 1px solid #0f0f0f69;
 }
 
 @media (prefers-color-scheme: dark) {
