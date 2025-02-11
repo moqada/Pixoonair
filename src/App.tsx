@@ -1,5 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {invoke} from '@tauri-apps/api/core';
+import {disable, enable, isEnabled} from '@tauri-apps/plugin-autostart';
 import './App.css';
 
 const GIF_FILE_TYPES = ['id', 'url'] as const;
@@ -20,11 +21,20 @@ const saveSettings = async (settings: AppSettings): Promise<void> => {
   await invoke('save_settings', settings);
 };
 
+const applyAutoStart = async (enabled: boolean): Promise<void> => {
+  if (enabled) {
+    await enable();
+  } else {
+    await disable();
+  }
+};
+
 function App() {
   const [targetDeviceName, setTargetDeviceName] = useState('');
   const [gifFileId, setGifFileId] = useState('');
   const [gifFileUrl, setGifFileUrl] = useState('');
   const [gifFileType, setGifFileType] = useState<'id' | 'url'>('id');
+  const [isAutoStartEnabled, setIsAutoStartEnabled] = useState(false);
   const onChangeTargetDeviceName = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setTargetDeviceName(e.currentTarget.value);
@@ -49,6 +59,9 @@ function App() {
     },
     []
   );
+  const onChangeIsAutoStartEnabled = useCallback(() => {
+    setIsAutoStartEnabled((prev) => !prev);
+  }, []);
   const onSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -58,8 +71,9 @@ function App() {
         gifFileUrl,
         targetDeviceName,
       });
+      applyAutoStart(isAutoStartEnabled);
     },
-    [gifFileId, gifFileType, gifFileUrl, targetDeviceName]
+    [gifFileId, gifFileType, gifFileUrl, isAutoStartEnabled, targetDeviceName]
   );
   useEffect(() => {
     loadSettings().then((settings) => {
@@ -67,6 +81,12 @@ function App() {
       setGifFileId(settings.gifFileId);
       setGifFileUrl(settings.gifFileUrl);
       setGifFileType(settings.gifFileType);
+    });
+  }, []);
+  useEffect(() => {
+    isEnabled().then((enabled) => {
+      setIsAutoStartEnabled(enabled);
+      applyAutoStart(enabled);
     });
   }, []);
 
@@ -120,6 +140,13 @@ function App() {
             />
           </>
         )}
+        <label htmlFor="input-is-auto-start-enabled">Start at login</label>
+        <input
+          id="input-is-auto-start-enabled"
+          onChange={onChangeIsAutoStartEnabled}
+          checked={isAutoStartEnabled}
+          type="checkbox"
+        />
         <button type="submit">Save</button>
       </form>
     </main>
