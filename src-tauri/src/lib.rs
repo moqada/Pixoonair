@@ -5,6 +5,7 @@ use std::sync::{
     Arc,
 };
 use tauri::{ActivationPolicy, RunEvent};
+use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_log;
 use tauri_plugin_store::StoreExt;
 
@@ -121,6 +122,10 @@ pub fn run() {
         .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_log::Builder::new().build())
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            None,
+        ))
         .setup(|app| {
             app.handle().plugin(tauri_plugin_positioner::init())?;
             tray::init(app)?;
