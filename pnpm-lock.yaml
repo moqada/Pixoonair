@@ -46,8 +46,8 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0(vite@6.4.1)
       typescript:
-        specifier: ~5.8.2
-        version: 5.8.2
+        specifier: ~5.9.3
+        version: 5.9.3
       vite:
         specifier: ^6.1.0
         version: 6.4.1
@@ -704,8 +704,8 @@ packages:
     resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
     engines: {node: '>=12.0.0'}
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1318,7 +1318,7 @@ snapshots:
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
 
-  typescript@5.8.2: {}
+  typescript@5.9.3: {}
 
   update-browserslist-db@1.1.1(browserslist@4.24.3):
     dependencies:
