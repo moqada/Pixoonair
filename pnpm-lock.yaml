@@ -12,19 +12,19 @@ importers:
         specifier: ^2.9.1
         version: 2.9.1
       '@tauri-apps/plugin-autostart':
-        specifier: ^2.5.1
+        specifier: 2.5.1
         version: 2.5.1
       '@tauri-apps/plugin-log':
-        specifier: ~2.8.0
+        specifier: 2.8.0
         version: 2.8.0
       '@tauri-apps/plugin-opener':
-        specifier: ^2.5.3
+        specifier: 2.5.3
         version: 2.5.3
       '@tauri-apps/plugin-positioner':
-        specifier: ~2.3.1
+        specifier: 2.3.1
         version: 2.3.1
       '@tauri-apps/plugin-store':
-        specifier: ~2.4.2
+        specifier: 2.4.2
         version: 2.4.2
       react:
         specifier: ^19.2.3
