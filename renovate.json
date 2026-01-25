@@ -6,6 +6,36 @@
   ],
   "packageRules": [
     {
+      "description": "Group tauri-plugin-log Rust and JS versions",
+      "groupName": "tauri-plugin-log",
+      "matchPackageNames": ["tauri-plugin-log", "@tauri-apps/plugin-log"]
+    },
+    {
+      "description": "Group tauri-plugin-autostart Rust and JS versions",
+      "groupName": "tauri-plugin-autostart",
+      "matchPackageNames": ["tauri-plugin-autostart", "@tauri-apps/plugin-autostart"]
+    },
+    {
+      "description": "Group tauri-plugin-opener Rust and JS versions",
+      "groupName": "tauri-plugin-opener",
+      "matchPackageNames": ["tauri-plugin-opener", "@tauri-apps/plugin-opener"]
+    },
+    {
+      "description": "Group tauri-plugin-positioner Rust and JS versions",
+      "groupName": "tauri-plugin-positioner",
+      "matchPackageNames": ["tauri-plugin-positioner", "@tauri-apps/plugin-positioner"]
+    },
+    {
+      "description": "Group tauri-plugin-store Rust and JS versions",
+      "groupName": "tauri-plugin-store",
+      "matchPackageNames": ["tauri-plugin-store", "@tauri-apps/plugin-store"]
+    },
+    {
+      "description": "Group Tauri core packages",
+      "groupName": "tauri-core",
+      "matchPackageNames": ["tauri", "tauri-build", "@tauri-apps/api", "@tauri-apps/cli"]
+    },
+    {
       "matchUpdateTypes": ["patch"],
       "enabled": false
     }
